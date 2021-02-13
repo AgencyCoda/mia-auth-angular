@@ -2,6 +2,8 @@
  * Public API Surface of mia-auth
  */
 
+export * from './lib/entities/mia-user';
+export * from './lib/entities/mia-token';
+
 export * from './lib/mia-auth.service';
-export * from './lib/mia-auth.component';
 export * from './lib/mia-auth.module';

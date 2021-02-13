@@ -3,7 +3,9 @@
   "version": "0.0.7",
   "peerDependencies": {
     "@angular/common": "^11.0.9",
-    "@angular/core": "^11.0.9"
+    "@angular/core": "^11.0.9",
+    "@ngx-pwa/local-storage": "^11.1.0",
+    "@agencycoda/mia-core": "^11.0.0"
   },
   "dependencies": {
     "tslib": "^2.0.0"

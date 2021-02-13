@@ -1,5 +1,4 @@
 import { Injectable, InjectionToken, NgModule } from '@angular/core';
-import { MiaAuthComponent } from './mia-auth.component';
 
 export const MIA_AUTH_PROVIDER = new InjectionToken<MiaAuthConfig>('agencycoda.auth');
 
@@ -9,9 +8,9 @@ export class MiaAuthConfig {
 }
 
 @NgModule({
-  declarations: [MiaAuthComponent],
+  declarations: [],
   imports: [],
-  exports: [MiaAuthComponent],
+  exports: [],
   providers: [
     {
       provide: MIA_AUTH_PROVIDER,
