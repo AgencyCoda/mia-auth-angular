@@ -2,7 +2,7 @@ import { MiaResponse } from '@agencycoda/mia-core';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { StorageMap } from '@ngx-pwa/local-storage';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MiaToken } from './entities/mia-token';
 import { MiaUser } from './entities/mia-user';
@@ -17,6 +17,7 @@ export class MiaAuthService {
 
   public currentUser = new BehaviorSubject<MiaToken>(new MiaToken());
   public isLoggedIn = new BehaviorSubject<boolean>(false);
+  public isLoggedOut = new Subject();
 
   constructor(
     @Inject(MIA_AUTH_PROVIDER) protected config: MiaAuthConfig,
@@ -56,6 +57,13 @@ export class MiaAuthService {
     }));
   }
 
+  logOut() {
+    this.storage.delete(MIA_AUTH_KEY_STORAGE_TOKEN).subscribe();
+    this.isLoggedIn.next(false);
+    this.currentUser.next(new MiaToken());
+    this.isLoggedOut.next();
+  }
+
   changePasswordInRecovery(token: string, email: string, password: string): Observable<MiaResponse<boolean>> {
     return this.http.post<MiaResponse<boolean>>(this.config.baseUrl + 'mia-auth/change-password-recovery', { email: email, token: token, password: password});
   }
@@ -64,9 +72,23 @@ export class MiaAuthService {
     return this.http.post<MiaResponse<boolean>>(this.config.baseUrl + 'mia-auth/recovery', { email: email});
   }
 
+  me(): Observable<MiaResponse<MiaUser>> {
+    return this.http.get<MiaResponse<MiaUser>>(this.config.baseUrl + 'mia-auth/me');
+  }
+
   saveUser(user: MiaToken) {
     this.storage.set(MIA_AUTH_KEY_STORAGE_TOKEN, JSON.stringify(user)).subscribe();
     this.isLoggedIn.next(true);
+  }
+
+  verifyIfTokenValid() {
+    this.me().subscribe(result => {
+      if(result.success == false && result.error?.code == -2){
+        this.logOut();
+      }
+    }, error => {
+
+    });
   }
 
   initVerify() {
