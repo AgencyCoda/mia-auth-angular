@@ -1,4 +1,6 @@
+import { HttpClientModule } from '@angular/common/http';
 import { Injectable, InjectionToken, NgModule } from '@angular/core';
+import { StorageModule } from '@ngx-pwa/local-storage';
 
 export const MIA_AUTH_PROVIDER = new InjectionToken<MiaAuthConfig>('agencycoda.auth');
 
@@ -9,7 +11,10 @@ export class MiaAuthConfig {
 
 @NgModule({
   declarations: [],
-  imports: [],
+  imports: [
+    HttpClientModule,
+    StorageModule
+  ],
   exports: [],
   providers: [
     {
