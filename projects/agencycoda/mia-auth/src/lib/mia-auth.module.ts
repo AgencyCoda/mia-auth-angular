@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Injectable, InjectionToken, NgModule } from '@angular/core';
 import { StorageModule } from '@ngx-pwa/local-storage';
 import { CurrentUserPipe } from './pipes/current-user.pipe';
+import { RoleTitlePipe } from './pipes/role-title.pipe';
 
 export const MIA_AUTH_PROVIDER = new InjectionToken<MiaAuthConfig>('agencycoda.auth');
 
@@ -11,13 +12,14 @@ export class MiaAuthConfig {
 }
 
 @NgModule({
-  declarations: [CurrentUserPipe],
+  declarations: [CurrentUserPipe, RoleTitlePipe],
   imports: [
     HttpClientModule,
     StorageModule
   ],
   exports: [
-    CurrentUserPipe
+    CurrentUserPipe,
+    RoleTitlePipe
   ],
   providers: [
     {
