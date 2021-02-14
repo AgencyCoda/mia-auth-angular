@@ -3,7 +3,8 @@ import { MiaRole } from '../entities/mia-role';
 import { MiaRoleService } from '../services/mia-role.service';
 
 @Pipe({
-  name: 'roleTitle'
+  name: 'roleTitle',
+  pure: true
 })
 export class RoleTitlePipe implements PipeTransform {
 
