@@ -57,6 +57,32 @@ export class MiaAuthService {
     }));
   }
 
+  signInUserWithRole(user: MiaUser, password: string, roles: Array<number>): Observable<MiaResponse<MiaToken>> {
+    return this.signIn(user.email, password)
+    .pipe(map(result => {
+
+      if(result.success){
+        let hasPermission = false;
+        for (const rol of roles) {
+          if(rol == result.response!.role){
+            hasPermission = true;
+          }
+        }
+
+        if(!hasPermission){
+          this.removeUser();
+          result.success = false;
+          result.error = {
+            code: -5,
+            message: 'Your account has not permission'
+          };
+        }
+      }
+
+      return result;
+    }));
+  }
+
   signInWithGoogle(token: string): Observable<MiaResponse<MiaToken>> {
     return this.http.post<MiaResponse<MiaToken>>(this.config.baseUrl + 'mia-auth/login-with-google', { token: token })
     .pipe(map(result => {
@@ -91,6 +117,11 @@ export class MiaAuthService {
   saveUser(user: MiaToken) {
     this.storage.set(MIA_AUTH_KEY_STORAGE_TOKEN, JSON.stringify(user)).subscribe();
     this.isLoggedIn.next(true);
+  }
+
+  removeUser() {
+    this.storage.delete(MIA_AUTH_KEY_STORAGE_TOKEN).subscribe();
+    this.isLoggedIn.next(false);
   }
 
   verifyIfTokenValid() {
