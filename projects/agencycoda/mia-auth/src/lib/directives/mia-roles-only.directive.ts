@@ -1,6 +1,4 @@
-import { Directive, Inject, Input, TemplateRef, ViewContainerRef } from '@angular/core';
-import { MiaPermissionConfig, MIA_PERMISSION_PROVIDER } from '../mia-auth.module';
-import { MiaAuthService } from '../mia-auth.service';
+import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 import { MiaPermissionService } from '../services/mia-permission.service';
 
 @Directive({

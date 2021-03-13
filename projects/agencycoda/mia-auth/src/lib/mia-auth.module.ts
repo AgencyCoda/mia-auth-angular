@@ -1,4 +1,3 @@
-import { MiaRole } from '@agencycoda/mia-auth';
 import { HttpClientModule } from '@angular/common/http';
 import { Injectable, InjectionToken, NgModule } from '@angular/core';
 import { StorageModule } from '@ngx-pwa/local-storage';
