@@ -5,6 +5,7 @@ import { StorageModule } from '@ngx-pwa/local-storage';
 import { MiaPermissionStatic, MiaRoleStatic } from './entities/mia-role';
 import { CurrentUserPipe } from './pipes/current-user.pipe';
 import { RoleTitlePipe } from './pipes/role-title.pipe';
+import { MiaRolesOnlyDirective } from './directives/mia-roles-only.directive';
 
 export const MIA_AUTH_PROVIDER = new InjectionToken<MiaAuthConfig>('agencycoda.auth');
 export const MIA_PERMISSION_PROVIDER = new InjectionToken<MiaPermissionConfig>('agencycoda.permission');
@@ -23,14 +24,15 @@ export class MiaPermissionConfig {
 }
 
 @NgModule({
-  declarations: [CurrentUserPipe, RoleTitlePipe],
+  declarations: [CurrentUserPipe, RoleTitlePipe, MiaRolesOnlyDirective],
   imports: [
     HttpClientModule,
     StorageModule
   ],
   exports: [
     CurrentUserPipe,
-    RoleTitlePipe
+    RoleTitlePipe,
+    MiaRolesOnlyDirective
   ],
   providers: [
     {

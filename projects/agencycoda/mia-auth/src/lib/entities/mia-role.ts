@@ -19,6 +19,7 @@ export class MiaRoleAccess {
 export class MiaRoleStatic {
     id: string = '';
     parent: string = '';
+    roleId: number = 0;
 }
 
 export class MiaPermissionStatic {
