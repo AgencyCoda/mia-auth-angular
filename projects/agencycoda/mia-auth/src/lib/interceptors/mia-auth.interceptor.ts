@@ -17,6 +17,10 @@ export class MiaAuthInterceptor implements HttpInterceptor {
   ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if(request.url.indexOf('storage.googleapis.com') >= 0){
+      return next.handle(request.clone());
+    }
+
     return this.authService.getUser().pipe(switchMap(user => {
       return next.handle(request.clone({
         setHeaders: { 'Authorization': 'Bearer ' + user.access_token }

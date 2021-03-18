@@ -1,6 +1,6 @@
 {
   "name": "@agencycoda/mia-auth",
-  "version": "11.0.14",
+  "version": "11.0.15",
   "peerDependencies": {
     "@angular/common": "^11.0.9",
     "@angular/core": "^11.0.9",
