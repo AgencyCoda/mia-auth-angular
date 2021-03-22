@@ -116,11 +116,13 @@ export class MiaAuthService {
 
   saveUser(user: MiaToken) {
     this.storage.set(MIA_AUTH_KEY_STORAGE_TOKEN, JSON.stringify(user)).subscribe();
+    this.currentUser.next(user);
     this.isLoggedIn.next(true);
   }
 
   removeUser() {
     this.storage.delete(MIA_AUTH_KEY_STORAGE_TOKEN).subscribe();
+    this.currentUser.next(new MiaToken());
     this.isLoggedIn.next(false);
   }
 
