@@ -20,5 +20,6 @@ export * from './lib/directives/mia-permission-only.directive';
 export * from './lib/mia-auth.service';
 export * from './lib/services/mia-role.service';
 export * from './lib/services/mia-permission.service';
+export * from './lib/services/mia-user.service';
 
 export * from './lib/mia-auth.module';
