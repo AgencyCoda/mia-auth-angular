@@ -110,6 +110,10 @@ export class MiaAuthService {
     return this.http.post<MiaResponse<boolean>>(this.config.baseUrl + 'mia-auth/recovery', { email: email});
   }
 
+  updateUser(user: any): Observable<MiaResponse<MiaUser>> {
+    return this.http.post<MiaResponse<MiaUser>>(this.config.baseUrl + 'mia-auth/update-profile', user);
+  }
+
   me(): Observable<MiaResponse<MiaUser>> {
     return this.http.get<MiaResponse<MiaUser>>(this.config.baseUrl + 'mia-auth/me');
   }
