@@ -1,10 +1,9 @@
 import { HttpClientModule } from '@angular/common/http';
-import { Injectable, InjectionToken, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { StorageModule } from '@ngx-pwa/local-storage';
-import { MiaPermissionStatic, MiaRoleStatic } from './entities/mia-role';
 import { CurrentUserPipe } from './pipes/current-user.pipe';
 import { RoleTitlePipe } from './pipes/role-title.pipe';
 import { MiaRolesOnlyDirective } from './directives/mia-roles-only.directive';
@@ -17,22 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-
-export const MIA_AUTH_PROVIDER = new InjectionToken<MiaAuthConfig>('agencycoda.auth');
-export const MIA_PERMISSION_PROVIDER = new InjectionToken<MiaPermissionConfig>('agencycoda.permission');
-
-@Injectable()
-export class MiaAuthConfig {
-  baseUrl: string = '';
-}
-
-@Injectable()
-export class MiaPermissionConfig {
-  roles: Array<MiaRoleStatic> = [];
-  permissions: Array<MiaPermissionStatic> = [];
-  allow: Array<{ role: string, permissions: [string]}> = [];
-  deny: Array<{ role: string, permissions: [string]}> = [];
-}
+import { MiaAuthConfig, MiaPermissionConfig, MIA_AUTH_PROVIDER, MIA_PERMISSION_PROVIDER } from './entities/mia-auth-config';
 
 @NgModule({
   declarations: [
@@ -64,8 +48,6 @@ export class MiaPermissionConfig {
 
     MiaRolesOnlyDirective,
     MiaPermissionOnlyDirective,
-
-    MiaLoginComponent
   ],
   providers: [
     {

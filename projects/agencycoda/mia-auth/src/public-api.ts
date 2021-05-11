@@ -5,6 +5,7 @@
 export * from './lib/entities/mia-user';
 export * from './lib/entities/mia-token';
 export * from './lib/entities/mia-role';
+export * from './lib/entities/mia-auth-config';
 
 export * from './lib/interceptors/mia-auth.interceptor';
 

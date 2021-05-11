@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { MiaPermissionConfig, MIA_PERMISSION_PROVIDER } from '../entities/mia-auth-config';
 import { MiaPermissionStatic, MiaRoleStatic } from '../entities/mia-role';
-import { MiaPermissionConfig, MIA_PERMISSION_PROVIDER } from '../mia-auth.module';
 import { MiaAuthService } from '../mia-auth.service';
 
 @Injectable({

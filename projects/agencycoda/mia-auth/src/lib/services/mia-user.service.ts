@@ -1,8 +1,8 @@
 import { MiaBaseCrudHttpService } from '@agencycoda/mia-core';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { MiaAuthConfig, MIA_AUTH_PROVIDER } from '../entities/mia-auth-config';
 import { MiaUser } from '../entities/mia-user';
-import { MiaAuthConfig, MIA_AUTH_PROVIDER } from '../mia-auth.module';
 
 @Injectable({
   providedIn: 'root'

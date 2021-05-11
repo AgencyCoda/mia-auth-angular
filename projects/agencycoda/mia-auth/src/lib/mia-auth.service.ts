@@ -4,9 +4,9 @@ import { Inject, Injectable } from '@angular/core';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { MiaAuthConfig, MIA_AUTH_PROVIDER } from './entities/mia-auth-config';
 import { MiaToken } from './entities/mia-token';
 import { MiaUser } from './entities/mia-user';
-import { MiaAuthConfig, MIA_AUTH_PROVIDER } from './mia-auth.module';
 
 export const MIA_AUTH_KEY_STORAGE_TOKEN = 'mia_auth.storage';
 

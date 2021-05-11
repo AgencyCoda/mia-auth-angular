@@ -1,5 +1,5 @@
 import { Inject, Pipe, PipeTransform } from '@angular/core';
-import { MiaPermissionConfig, MIA_PERMISSION_PROVIDER } from '../mia-auth.module';
+import { MiaPermissionConfig, MIA_PERMISSION_PROVIDER } from '../entities/mia-auth-config';
 
 @Pipe({
   name: 'roleId'

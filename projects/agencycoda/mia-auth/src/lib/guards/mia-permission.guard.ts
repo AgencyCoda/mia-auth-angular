@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { MiaPermissionConfig, MIA_PERMISSION_PROVIDER } from '../mia-auth.module';
+import { MiaPermissionConfig, MIA_PERMISSION_PROVIDER } from '../entities/mia-auth-config';
 
 @Injectable({
   providedIn: 'root'
