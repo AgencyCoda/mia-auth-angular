@@ -1,1 +1,47 @@
-<p>mia-login works!</p>
+<div *ngIf="config" class="login">
+    <div class="scroll">
+
+        <div *ngIf="isLoading" class="content">
+            <!-- <app-loading-bound-circles></app-loading-bound-circles> -->
+            Loading...
+        </div>
+
+        <div *ngIf="!isLoading" class="content intro-component-animation" [formGroup]="formGroup">
+            <div *ngIf="config.logoImage != '' && config.logoImage != undefined" class="logo">
+                <a [routerLink]="config.routeHome">
+                    <img [src]="config.logoImage" alt="">
+                </a>
+            </div>
+            
+            <h1> {{ config.titlePage }} </h1>
+            <mat-form-field>
+                <mat-label>Email address</mat-label>
+                <input matInput type="email" name="email_login" formControlName="email" placeholder="yourEmail@company.com" />
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Password</mat-label>
+                <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="********" />
+                <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                    <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+            <button mat-button color="primary" class="button-small" [routerLink]="config.routeRecovery"> Forgot password </button>
+
+            <div *ngIf="messageError != ''" class="alert alert-error">{{ messageError }}</div>
+    
+            <button mat-raised-button color="primary" class="btn" (click)="onClickLogin()">LOG IN</button>
+
+            <button mat-raised-button color="primary" class="btn" (click)="loginWithGoogle()">LOG IN With Google</button>
+
+            <div style="text-align: center;">
+                <a [routerLink]="config.routeRegister" class="link hover-linear body-2"> Don’t have an account? Sign Up </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="illustration">
+        <h2 class="quote"><i> “Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed enim” </i></h2>
+        <img *ngIf="config.imageRight != ''" [src]="config.imageRight" alt="illustration" />
+    </div>
+</div>
