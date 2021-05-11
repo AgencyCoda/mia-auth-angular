@@ -32,7 +32,7 @@
     
             <button mat-raised-button color="primary" class="btn" (click)="onClickLogin()">LOG IN</button>
 
-            <button mat-raised-button color="primary" class="btn" (click)="loginWithGoogle()">LOG IN With Google</button>
+            <button *ngIf="config.hasLoginWithGoogle" mat-raised-button color="primary" class="btn" (click)="loginWithGoogle()">LOG IN With Google</button>
 
             <div style="text-align: center;">
                 <a [routerLink]="config.routeRegister" class="link hover-linear body-2"> Don’t have an account? Sign Up </a>

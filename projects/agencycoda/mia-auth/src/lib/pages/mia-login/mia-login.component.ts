@@ -12,6 +12,7 @@ export class MiaLoginPageConfig {
   routeSuccess = '/';
   routeRegister = '/auth/register';
   routeRecovery = '/auth/recovery';
+  hasLoginWithGoogle = false;
 }
 @Component({
   selector: 'mia-login',

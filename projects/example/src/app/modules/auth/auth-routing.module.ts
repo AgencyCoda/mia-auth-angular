@@ -15,7 +15,8 @@ const routes: Routes = [
       routeHome: '/',
       routeSuccess: '/',
       routeRegister: '/auth/register',
-      routeRecovery: '/auth/recovery-password'
+      routeRecovery: '/auth/recovery-password',
+      hasLoginWithGoogle: false
     } as MiaLoginPageConfig
   }
 ];
