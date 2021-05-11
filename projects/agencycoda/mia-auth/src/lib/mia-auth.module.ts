@@ -7,6 +7,7 @@ import { RoleTitlePipe } from './pipes/role-title.pipe';
 import { MiaRolesOnlyDirective } from './directives/mia-roles-only.directive';
 import { MiaPermissionOnlyDirective } from './directives/mia-permission-only.directive';
 import { RoleIdPipe } from './pipes/role-id.pipe';
+import { MiaLoginComponent } from './pages/mia-login/mia-login.component';
 
 export const MIA_AUTH_PROVIDER = new InjectionToken<MiaAuthConfig>('agencycoda.auth');
 export const MIA_PERMISSION_PROVIDER = new InjectionToken<MiaPermissionConfig>('agencycoda.permission');
@@ -31,7 +32,8 @@ export class MiaPermissionConfig {
     RoleIdPipe,
     
     MiaRolesOnlyDirective, 
-    MiaPermissionOnlyDirective],
+    MiaPermissionOnlyDirective,
+    MiaLoginComponent],
   imports: [
     HttpClientModule,
     StorageModule
@@ -42,7 +44,9 @@ export class MiaPermissionConfig {
     RoleIdPipe,
 
     MiaRolesOnlyDirective,
-    MiaPermissionOnlyDirective
+    MiaPermissionOnlyDirective,
+
+    MiaLoginComponent
   ],
   providers: [
     {
