@@ -41,7 +41,7 @@ export class MiaRoleService extends MiaBaseCrudHttpService<MiaRole> {
     return this.storage.get<string>(MIA_AUTH_KEY_STORAGE_ROLES, { type: 'string' })
     .pipe(switchMap(data => {
       if(data == undefined || data == ''){
-        return this.listOb(query).pipe(map(result => {
+        return super.listOb(query).pipe(map(result => {
 
           this.storage.set(MIA_AUTH_KEY_STORAGE_ROLES, JSON.stringify(result)).subscribe();
 
