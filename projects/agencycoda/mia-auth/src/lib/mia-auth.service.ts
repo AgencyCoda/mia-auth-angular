@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { MiaAuthConfig, MIA_AUTH_PROVIDER } from './entities/mia-auth-config';
 import { MiaToken } from './entities/mia-token';
 import { MiaUser } from './entities/mia-user';
+import { MIA_AUTH_KEY_STORAGE_PERMISSIONS_BY_USER, MIA_AUTH_KEY_STORAGE_ROLES } from './services/mia-role.service';
 
 export const MIA_AUTH_KEY_STORAGE_TOKEN = 'mia_auth.storage';
 
@@ -97,6 +98,8 @@ export class MiaAuthService {
 
   logOut() {
     this.storage.delete(MIA_AUTH_KEY_STORAGE_TOKEN).subscribe();
+    this.storage.delete(MIA_AUTH_KEY_STORAGE_ROLES).subscribe();
+    this.storage.delete(MIA_AUTH_KEY_STORAGE_PERMISSIONS_BY_USER).subscribe();
     this.isLoggedIn.next(false);
     this.currentUser.next(new MiaToken());
     this.isLoggedOut.next();

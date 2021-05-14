@@ -5,9 +5,10 @@ import { StorageMap } from '@ngx-pwa/local-storage';
 import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { MiaAuthConfig, MIA_AUTH_PROVIDER } from '../entities/mia-auth-config';
-import { MiaRole } from '../entities/mia-role';
+import { MiaPermission, MiaRole } from '../entities/mia-role';
 
 export const MIA_AUTH_KEY_STORAGE_ROLES = 'mia_auth.storage.roles';
+export const MIA_AUTH_KEY_STORAGE_PERMISSIONS_BY_USER = 'mia_auth.storage.permissions_by_user';
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +53,23 @@ export class MiaRoleService extends MiaBaseCrudHttpService<MiaRole> {
       return of(JSON.parse(data));
     }));
 
+  }
+
+  allPermissionByUser(): Observable<Array<MiaPermission>> {
+    
+    return this.storage.get<string>(MIA_AUTH_KEY_STORAGE_PERMISSIONS_BY_USER, { type: 'string' })
+    .pipe(switchMap(data => {
+      if(data == undefined || data == ''){
+        return this.getOb(this.config.baseUrl + 'mia-auth/role/access').pipe(map(result => {
+
+          this.storage.set(MIA_AUTH_KEY_STORAGE_PERMISSIONS_BY_USER, JSON.stringify(result)).subscribe();
+
+          return result;
+        }));
+      }
+
+      return of(JSON.parse(data));
+    }));
   }
 
   listRoles(): Promise<Array<MiaRole>> {
