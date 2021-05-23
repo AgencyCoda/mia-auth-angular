@@ -118,7 +118,24 @@ export class MiaAuthService {
   }
 
   me(): Observable<MiaResponse<MiaUser>> {
-    return this.http.get<MiaResponse<MiaUser>>(this.config.baseUrl + 'mia-auth/me');
+    return this.http.get<MiaResponse<MiaUser>>(this.config.baseUrl + 'mia-auth/me')
+    .pipe(map(result => {
+
+      if(result.success){
+        this.saveMeWithToken(result.response!);
+      }
+
+      return result;
+    }));;
+  }
+
+  saveMeWithToken(user: MiaUser) {
+    this.getUser().subscribe(result => {
+      let newItem: MiaToken = user as MiaToken;
+      newItem.token_type = 'bearer';
+      newItem.access_token = result.access_token;
+      this.saveUser(newItem);
+    });
   }
 
   saveUser(user: MiaToken) {
