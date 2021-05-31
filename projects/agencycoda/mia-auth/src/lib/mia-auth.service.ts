@@ -96,6 +96,18 @@ export class MiaAuthService {
     }));
   }
 
+  signInWithFacebook(token: string): Observable<MiaResponse<MiaToken>> {
+    return this.http.post<MiaResponse<MiaToken>>(this.config.baseUrl + 'mia-auth/login-with-facebook', { token: token })
+    .pipe(map(result => {
+
+      if(result.success){
+        this.saveUser(result.response!);
+      }
+
+      return result;
+    }));
+  }
+
   logOut() {
     this.storage.delete(MIA_AUTH_KEY_STORAGE_TOKEN).subscribe();
     this.storage.delete(MIA_AUTH_KEY_STORAGE_ROLES).subscribe();
