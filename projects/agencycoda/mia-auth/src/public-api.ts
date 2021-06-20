@@ -17,6 +17,7 @@ export * from './lib/pipes/role-id.pipe';
 
 export * from './lib/directives/mia-roles-only.directive';
 export * from './lib/directives/mia-permission-only.directive';
+export * from './lib/directives/mia-current-user.directive';
 
 export * from './lib/mia-auth.service';
 export * from './lib/services/mia-role.service';

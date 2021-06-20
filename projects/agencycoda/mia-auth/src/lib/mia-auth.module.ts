@@ -17,6 +17,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MiaAuthConfig, MiaPermissionConfig, MIA_AUTH_PROVIDER, MIA_PERMISSION_PROVIDER } from './entities/mia-auth-config';
+import { MiaCurrentUserDirective } from './directives/mia-current-user.directive';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,10 @@ import { MiaAuthConfig, MiaPermissionConfig, MIA_AUTH_PROVIDER, MIA_PERMISSION_P
     
     MiaRolesOnlyDirective, 
     MiaPermissionOnlyDirective,
-    MiaLoginComponent],
+    MiaCurrentUserDirective,
+
+    MiaLoginComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -48,6 +52,7 @@ import { MiaAuthConfig, MiaPermissionConfig, MIA_AUTH_PROVIDER, MIA_PERMISSION_P
 
     MiaRolesOnlyDirective,
     MiaPermissionOnlyDirective,
+    MiaCurrentUserDirective
   ],
   providers: [
     {
