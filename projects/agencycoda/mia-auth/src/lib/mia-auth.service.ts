@@ -129,6 +129,10 @@ export class MiaAuthService {
     return this.http.post<MiaResponse<MiaUser>>(this.config.baseUrl + 'mia-auth/update-profile', user);
   }
 
+  verifiedEmail(email: string, token: string): Observable<MiaResponse<boolean>> {
+    return this.http.post<MiaResponse<boolean>>(this.config.baseUrl + 'mia-auth/verified-email', { email: email, token: token });
+  }
+
   me(): Observable<MiaResponse<MiaUser>> {
     return this.http.get<MiaResponse<MiaUser>>(this.config.baseUrl + 'mia-auth/me')
     .pipe(map(result => {
