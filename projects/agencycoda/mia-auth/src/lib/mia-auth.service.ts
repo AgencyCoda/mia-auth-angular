@@ -139,6 +139,8 @@ export class MiaAuthService {
 
       if(result.success){
         this.saveMeWithToken(result.response!);
+      } else if (result.error && result.error!.code == -2) {
+        this.logOut();
       }
 
       return result;
