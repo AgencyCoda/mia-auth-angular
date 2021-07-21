@@ -75,6 +75,11 @@ export class MiaLoginComponent implements OnInit {
        } else {
          this.messageError = data.error!.message;
        }
+     }, error => {
+      this.isLoading = false;
+      if(error.message){
+        this.messageError = error.message;
+      }
      });
   }
 
