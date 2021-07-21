@@ -1,7 +1,10 @@
+import { MiaResponse } from '@agencycoda/mia-core';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { MiaToken } from '../../entities/mia-token';
 import { MiaAuthService } from '../../mia-auth.service';
 
 export class MiaLoginPageConfig {
@@ -13,6 +16,8 @@ export class MiaLoginPageConfig {
   routeRegister = '/auth/register';
   routeRecovery = '/auth/recovery';
   hasLoginWithGoogle = false;
+  hasRegister = true;
+  roles = [];
 }
 @Component({
   selector: 'mia-login',
@@ -57,7 +62,13 @@ export class MiaLoginComponent implements OnInit {
     }
 
     this.isLoading = true;
-    this.authService.signIn(this.formGroup.get('email')!.value, this.formGroup.get('password')!.value).subscribe(data => {
+    let obs: Observable<MiaResponse<MiaToken>>;
+    if(this.config.roles.length == 0){
+      obs = this.authService.signIn(this.formGroup.get('email')!.value, this.formGroup.get('password')!.value);
+    } else {
+      obs = this.authService.signInUserWithRole(this.formGroup.get('email')!.value, this.formGroup.get('password')!.value, this.config.roles);
+    }
+    obs.subscribe(data => {
        this.isLoading = false;
        if (data.success) {
         this.navigator.navigateByUrl('/');

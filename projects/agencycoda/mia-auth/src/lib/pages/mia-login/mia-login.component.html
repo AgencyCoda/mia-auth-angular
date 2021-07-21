@@ -34,7 +34,7 @@
 
             <button *ngIf="config.hasLoginWithGoogle" mat-raised-button color="primary" class="btn" (click)="loginWithGoogle()">LOG IN With Google</button>
 
-            <div style="text-align: center;">
+            <div *ngIf="config.hasRegister" style="text-align: center;">
                 <a [routerLink]="config.routeRegister" class="link hover-linear body-2"> Don’t have an account? Sign Up </a>
             </div>
         </div>
