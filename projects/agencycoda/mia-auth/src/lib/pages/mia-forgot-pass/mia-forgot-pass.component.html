@@ -1,0 +1,39 @@
+<div class="forgot-pass">
+    <div class="scroll">
+        <a *ngIf="config.logoImage" [routerLink]="config.routeHome" class="logo">
+            <img [src]="config.logoImage" alt="">
+        </a>
+
+        <div *ngIf="isLoading" class="content">
+            Loading...
+            <!-- <app-loading-bound-circles></app-loading-bound-circles> -->
+        </div>
+
+        <!-- Step 1 -->
+        <div *ngIf="!isLoading" class="content intro-component-animation">
+            <h1>Forgot password</h1>
+            <p *ngIf="!isSend">Enter your email to recover your forgot password</p>
+            <br>
+            <mat-form-field *ngIf="!isSend" appearance="outline">
+                <mat-label>Email address</mat-label>
+                <input matInput type="email" name="email_recovery" [formControl]="inputEmail" placeholder="yourEmail@gmail.com" />
+            </mat-form-field>
+
+            <div *ngIf="messageError != ''" class="alert alert-error">{{ messageError }}</div>
+    
+            <button *ngIf="!isSend" mat-raised-button color="primary" class="btn" (click)="onClickRecovery()">RECOVERY PASS</button>
+
+            <div *ngIf="isSend" class="alert alert-success intro-component-animation">
+                If you have an account, we’ll email you a reset link.
+            </div>
+
+            <div style="text-align: center; margin-top: 3em;">
+                <a [routerLink]="config.routeLogin" class="link hover-linear body-2"> I remember my password, Login </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="illustration">
+        <img *ngIf="config.imageRight" [src]="config.imageRight" alt="illustration" />
+    </div>
+</div>

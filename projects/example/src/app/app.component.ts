@@ -17,8 +17,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.roleService.listOb(new MiaQuery()).subscribe(result => {
+    /*this.roleService.listOb(new MiaQuery()).subscribe(result => {
       console.log(result);
-    });
+    });*/
   }
 }

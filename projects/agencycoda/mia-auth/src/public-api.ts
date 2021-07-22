@@ -24,6 +24,10 @@ export * from './lib/services/mia-role.service';
 export * from './lib/services/mia-permission.service';
 export * from './lib/services/mia-user.service';
 
+/**
+ * Pages
+ */
 export * from './lib/pages/mia-login/mia-login.component';
+export * from './lib/pages/mia-forgot-pass/mia-forgot-pass.component';
 
 export * from './lib/mia-auth.module';

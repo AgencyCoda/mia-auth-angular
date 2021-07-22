@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MiaLoginComponent, MiaLoginPageConfig } from 'projects/agencycoda/mia-auth/src/public-api';
-
-import { AuthComponent } from './auth.component';
+import { MiaForgotPassComponent, MiaLoginComponent, MiaLoginPageConfig } from 'projects/agencycoda/mia-auth/src/public-api';
 
 const routes: Routes = [
   { 
@@ -18,7 +16,18 @@ const routes: Routes = [
       routeRecovery: '/auth/recovery-password',
       hasLoginWithGoogle: false
     } as MiaLoginPageConfig
-  }
+  },
+  { 
+    path: 'recovery-password', 
+    component: MiaForgotPassComponent,
+    data: {
+      titlePage: '',
+      logoImage: '',
+      imageRight: '',
+      routeHome: '/',
+      routeLogin: '/auth/login'
+    }
+  },
 ];
 
 @NgModule({
