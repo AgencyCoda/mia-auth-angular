@@ -1,7 +1,7 @@
-import { MiaAuthService } from '@agencycoda/mia-auth';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MiaAuthService } from '../../mia-auth.service';
 
 export class MiaForgoPassPageConfig {
   titlePage = '';

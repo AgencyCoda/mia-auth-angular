@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { MiaToken } from '../../entities/mia-token';
+import { MiaUser } from '../../entities/mia-user';
 import { MiaAuthService } from '../../mia-auth.service';
 
 export class MiaLoginPageConfig {
@@ -66,7 +67,9 @@ export class MiaLoginComponent implements OnInit {
     if(this.config.roles.length == 0){
       obs = this.authService.signIn(this.formGroup.get('email')!.value, this.formGroup.get('password')!.value);
     } else {
-      obs = this.authService.signInUserWithRole(this.formGroup.get('email')!.value, this.formGroup.get('password')!.value, this.config.roles);
+      let user = new MiaUser();
+      user.email = this.formGroup.get('email')!.value;
+      obs = this.authService.signInUserWithRole(user, this.formGroup.get('password')!.value, this.config.roles);
     }
     obs.subscribe(data => {
        this.isLoading = false;
