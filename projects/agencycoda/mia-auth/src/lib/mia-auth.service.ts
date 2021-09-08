@@ -133,11 +133,11 @@ export class MiaAuthService {
     return this.http.post<MiaResponse<boolean>>(this.config.baseUrl + 'mia-auth/verified-email', { email: email, token: token });
   }
 
-  me(): Observable<MiaResponse<MiaUser>> {
+  me(withoutSave?: boolean): Observable<MiaResponse<MiaUser>> {
     return this.http.get<MiaResponse<MiaUser>>(this.config.baseUrl + 'mia-auth/me')
     .pipe(map(result => {
 
-      if(result.success){
+      if(result.success && (withoutSave == undefined || withoutSave == false)){
         this.saveMeWithToken(result.response!);
       } else if (result.error && result.error!.code == -2) {
         this.logOut();
