@@ -122,16 +122,16 @@ export class MiaAuthService {
     return this.http.post<MiaResponse<boolean>>(this.config.baseUrl + 'mia-auth/change-password-recovery', { email: email, token: token, password: password});
   }
 
-  recoveryPass(email: string): Observable<MiaResponse<boolean>> {
-    return this.http.post<MiaResponse<boolean>>(this.config.baseUrl + 'mia-auth/recovery', { email: email});
+  recoveryPass(email: string, lang?: string): Observable<MiaResponse<boolean>> {
+    return this.http.post<MiaResponse<boolean>>(this.config.baseUrl + 'mia-auth/recovery', { email: email, lang: lang });
   }
 
   updateUser(user: any): Observable<MiaResponse<MiaUser>> {
     return this.http.post<MiaResponse<MiaUser>>(this.config.baseUrl + 'mia-auth/update-profile', user);
   }
 
-  verifiedEmail(email: string, token: string): Observable<MiaResponse<boolean>> {
-    return this.http.post<MiaResponse<boolean>>(this.config.baseUrl + 'mia-auth/verified-email', { email: email, token: token });
+  verifiedEmail(email: string, token: string, lang?: string): Observable<MiaResponse<boolean>> {
+    return this.http.post<MiaResponse<boolean>>(this.config.baseUrl + 'mia-auth/verified-email', { email: email, token: token, lang: lang });
   }
 
   me(withoutSave?: boolean): Observable<MiaResponse<MiaUser>> {
