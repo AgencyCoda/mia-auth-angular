@@ -28,10 +28,11 @@ export class MiaAuthService {
     this.initVerify();
   }
 
-  register(user: MiaUser, password: string): Observable<MiaResponse<boolean>> {
+  register(user: MiaUser, password: string, lang?: string): Observable<MiaResponse<boolean>> {
     let params: any = user;
     params.password = password;
     params.platform = 2;
+    params.lang = lang;
     return this.http.post<MiaResponse<boolean>>(this.config.baseUrl + 'mia-auth/register', params)
     .pipe(map(result => {
       if(result.success){
