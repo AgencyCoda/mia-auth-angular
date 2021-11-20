@@ -27,6 +27,11 @@ export * from './lib/services/mia-user.service';
 /**
  * Pages
  */
+ export * from './lib/components/mia-user-card/mia-user-card.component';
+
+/**
+ * Pages
+ */
 export * from './lib/pages/mia-login/mia-login.component';
 export * from './lib/pages/mia-forgot-pass/mia-forgot-pass.component';
 

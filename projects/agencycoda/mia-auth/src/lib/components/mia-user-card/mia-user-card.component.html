@@ -1,0 +1,34 @@
+<div class="my-profile intro-component-animation">
+
+    <div class="box">
+        <h4>Datos cuenta</h4>
+
+        <div class="d-flex">
+            <div class="avatar">
+                <div class="container-image">
+                    <img [src]="user.photo" onerror="this.src='/assets/img/user-avatar-empty.svg';" />
+                </div>
+            </div>
+            <button *ngIf="showButtonEdit" mat-raised-button color="accent" class="item__btn" (click)="onClickEdit()">Editar perfil</button>
+        </div>
+
+        <div *ngFor="let field of fields" class="item d-flex">
+            <h5>{{ field.title }}</h5>
+            <p>{{ getValue(field.key) }}</p>
+        </div>
+
+        <div *ngFor="let field of fieldsExtra" class="item d-flex">
+            <h5>{{ field.title }}</h5>
+            <p>{{ field.value }}</p>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="item d-flex">
+            <h5>Password</h5>
+            <p>************* <mat-icon color="color-success">https</mat-icon></p>
+            <button mat-raised-button color="accent" class="item__btn" (click)="onClickChangePassword()">Change password</button>
+        </div>
+    </div>
+
+</div>
