@@ -1,8 +1,8 @@
 import { MiaResponse } from '@agencycoda/mia-core';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { MiaToken } from '../../entities/mia-token';
 import { MiaUser } from '../../entities/mia-user';
@@ -25,7 +25,7 @@ export class MiaLoginPageConfig {
   templateUrl: './mia-login.component.html',
   styleUrls: ['./mia-login.component.scss']
 })
-export class MiaLoginComponent implements OnInit {
+export class MiaLoginComponent implements OnInit, OnDestroy {
 
   config!: MiaLoginPageConfig;
 
@@ -38,6 +38,8 @@ export class MiaLoginComponent implements OnInit {
   hidePassword = true;
   messageError = '';
 
+  subscription?: Subscription;
+
   constructor(
     protected authService: MiaAuthService,
     protected navigator: Router,
@@ -46,7 +48,13 @@ export class MiaLoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadConfig();
-    this.processConfig();
+  }
+
+  ngOnDestroy(): void {
+    if(this.subscription != undefined){
+      this.subscription.unsubscribe();
+      this.subscription = undefined;
+    }
   }
 
   onClickLogin() {
@@ -74,7 +82,7 @@ export class MiaLoginComponent implements OnInit {
     obs.subscribe(data => {
        this.isLoading = false;
        if (data.success) {
-        this.navigator.navigateByUrl('/');
+        this.navigator.navigateByUrl(this.config.routeSuccess);
        } else {
          this.messageError = data.error!.message;
        }
@@ -90,37 +98,35 @@ export class MiaLoginComponent implements OnInit {
 
   }
 
-  processConfig() {
-    this.route.queryParams
-      .pipe(
-        switchMap((params) => {
-          const redirect = params.redirect;
-          if (
-            redirect !== '/login' &&
-            redirect !== '/' &&
-            redirect !== '' &&
-            redirect !== null &&
-            redirect !== undefined &&
-            redirect !== '%2F' &&
-            redirect !== '/login;redirect=%2F'
-          ) {
-            this.config.routeSuccess = redirect;
-          }
-
-          return this.authService.isLoggedIn;
-        })
-      )
-      .subscribe((isLogged) => {
-        if (isLogged) {
-          this.navigator.navigateByUrl(this.config.routeSuccess);
-        }
-        return this.authService.getUser();
-      });
-  }
-
   loadConfig() {
-    this.route.data.subscribe(result => {
+    this.subscription = this.route.data
+    .pipe(switchMap(result => {
       this.config = result as MiaLoginPageConfig;
+      return this.route.queryParams;
+    }))
+    .pipe(
+      switchMap((params) => {
+        const redirect = params.redirect;
+        if (
+          redirect !== '/login' &&
+          redirect !== '/' &&
+          redirect !== '' &&
+          redirect !== null &&
+          redirect !== undefined &&
+          redirect !== '%2F' &&
+          redirect !== '/login;redirect=%2F'
+        ) {
+          this.config.routeSuccess = redirect;
+        }
+
+        return this.authService.isLoggedIn;
+      })
+    )
+    .subscribe((isLogged) => {
+      if (isLogged) {
+        this.navigator.navigateByUrl(this.config.routeSuccess);
+      }
+      return this.authService.getUser();
     });
   }
 }
