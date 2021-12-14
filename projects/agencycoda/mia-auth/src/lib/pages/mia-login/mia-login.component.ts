@@ -18,6 +18,8 @@ export class MiaLoginPageConfig {
   routeRecovery = '/auth/recovery';
   hasLoginWithGoogle = false;
   hasRegister = true;
+  hasRecoveryPassword = true;
+  phrase? = '“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed enim”';
   roles = [];
 }
 @Component({

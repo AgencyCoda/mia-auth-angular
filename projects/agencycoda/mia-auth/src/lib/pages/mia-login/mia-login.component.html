@@ -26,7 +26,8 @@
                     <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
             </mat-form-field>
-            <button mat-button color="primary" class="button-small" [routerLink]="config.routeRecovery"> Forgot password </button>
+
+            <button *ngIf="config.hasRecoveryPassword" mat-button color="primary" class="button-small" [routerLink]="config.routeRecovery"> Forgot password </button>
 
             <div *ngIf="messageError != ''" class="alert alert-error">{{ messageError }}</div>
     
@@ -41,7 +42,7 @@
     </div>
 
     <div class="illustration">
-        <h2 class="quote"><i> “Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed enim” </i></h2>
+        <h2 class="quote"><i> {{ config.phrase }} </i></h2>
         <img *ngIf="config.imageRight != ''" [src]="config.imageRight" alt="illustration" />
     </div>
 </div>
