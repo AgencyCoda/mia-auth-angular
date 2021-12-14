@@ -1,10 +1,10 @@
 {
   "name": "@agencycoda/mia-auth",
-  "version": "11.0.40",
+  "version": "12.2.13",
   "peerDependencies": {
-    "@angular/common": ">=11.0.9",
-    "@angular/core": ">=11.0.9",
-    "@ngx-pwa/local-storage": ">=11.1.0",
+    "@angular/common": ">=12.2.13",
+    "@angular/core": ">=12.2.13",
+    "@ngx-pwa/local-storage": ">=12.0.0",
     "@agencycoda/mia-core": ">=12.2.15"
   },
   "dependencies": {
