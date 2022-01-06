@@ -1,10 +1,9 @@
-import { MiaBaseCrudHttpService, MiaBaseHttpService, MiaPagination, MiaQuery, MiaResponse } from '@agencycoda/mia-core';
+import { MiaBaseCrudHttpService, MiaBaseHttpService, MiaCoreConfig, MiaPagination, MiaQuery, MiaResponse, MIA_CORE_PROVIDER } from '@agencycoda/mia-core';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { MiaAuthConfig, MIA_AUTH_PROVIDER } from '../entities/mia-auth-config';
 import { MiaPermission, MiaRole } from '../entities/mia-role';
 
 export const MIA_AUTH_KEY_STORAGE_ROLES = 'mia_auth.storage.roles';
@@ -16,11 +15,11 @@ export const MIA_AUTH_KEY_STORAGE_PERMISSIONS_BY_USER = 'mia_auth.storage.permis
 export class MiaRoleService extends MiaBaseCrudHttpService<MiaRole> {
 
   constructor(
-    @Inject(MIA_AUTH_PROVIDER) protected config: MiaAuthConfig,
+    @Inject(MIA_CORE_PROVIDER) protected config: MiaCoreConfig,
     protected http: HttpClient,
     protected storage: StorageMap
   ) {
-    super(http);
+    super(config, http);
     this.basePathUrl = config.baseUrl + 'mia-auth/role';
     
   }

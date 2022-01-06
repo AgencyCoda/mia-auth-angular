@@ -5,8 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MiaAuthModule } from 'projects/agencycoda/mia-auth/src/lib/mia-auth.module';
-import { MIA_AUTH_PROVIDER } from '@agencycoda/mia-auth';
-import { MiaCoreModule } from '@agencycoda/mia-core';
+import { MiaCoreModule, MIA_CORE_PROVIDER } from '@agencycoda/mia-core';
+import { MIA_AUTH_PROVIDER } from 'projects/agencycoda/mia-auth/src/public-api';
 
 @NgModule({
   declarations: [
@@ -21,9 +21,16 @@ import { MiaCoreModule } from '@agencycoda/mia-core';
   ],
   providers: [
     { 
+      provide: MIA_CORE_PROVIDER, 
+      useValue: {
+        baseUrl: 'http://34.151.195.34/',
+        v2: true
+      }
+    },
+    { 
       provide: MIA_AUTH_PROVIDER, 
       useValue: {
-        baseUrl: 'http://localhost:8080/'
+        baseUrl: 'http://34.151.195.34/'
       }
     },
   ],

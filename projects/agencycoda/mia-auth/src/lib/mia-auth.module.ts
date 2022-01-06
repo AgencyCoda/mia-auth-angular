@@ -11,6 +11,8 @@ import { MiaPermissionOnlyDirective } from './directives/mia-permission-only.dir
 import { RoleIdPipe } from './pipes/role-id.pipe';
 import { MiaAuthConfig, MiaPermissionConfig, MIA_AUTH_PROVIDER, MIA_PERMISSION_PROVIDER } from './entities/mia-auth-config';
 
+import { MiaCoreConfig, MiaCoreModule, MIA_CORE_PROVIDER } from '@agencycoda/mia-core';
+
 /** Angular Material */
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -48,6 +50,8 @@ import { MiaUserCardComponent } from './components/mia-user-card/mia-user-card.c
     HttpClientModule,
     RouterModule,
     StorageModule,
+
+    MiaCoreModule,
 
     /** Angular Material */
     MatFormFieldModule,

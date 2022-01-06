@@ -73,7 +73,7 @@ export class MiaLoginComponent implements OnInit, OnDestroy {
     }
 
     this.isLoading = true;
-    let obs: Observable<MiaResponse<MiaToken>>;
+    let obs: Observable<MiaToken>;
     if(this.config.roles.length == 0){
       obs = this.authService.signIn(this.formGroup.get('email')!.value, this.formGroup.get('password')!.value);
     } else {
@@ -83,14 +83,10 @@ export class MiaLoginComponent implements OnInit, OnDestroy {
     }
     obs.subscribe(data => {
        this.isLoading = false;
-       if (data.success) {
-        this.navigator.navigateByUrl(this.config.routeSuccess);
-       } else {
-         this.messageError = data.error!.message;
-       }
+      this.navigator.navigateByUrl(this.config.routeSuccess);
      }, error => {
       this.isLoading = false;
-      if(error.message){
+      if(error && error.message){
         this.messageError = error.message;
       }
      });

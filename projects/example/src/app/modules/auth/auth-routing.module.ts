@@ -14,7 +14,8 @@ const routes: Routes = [
       routeSuccess: '/',
       routeRegister: '/auth/register',
       routeRecovery: '/auth/recovery-password',
-      hasLoginWithGoogle: false
+      hasLoginWithGoogle: false,
+      roles: [1]
     } as MiaLoginPageConfig
   },
   { 
