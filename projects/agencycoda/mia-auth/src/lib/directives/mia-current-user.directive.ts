@@ -28,7 +28,7 @@ export class MiaCurrentUserDirective {
     // Clean View
     this.viewContainer.clear();
     // Verify if logged
-    if(this.currentUser == undefined || this.currentUser.id <= 0){
+    if(this.currentUser == undefined || (this.currentUser.id != undefined && this.currentUser.id <= 0)){
       return;
     }
     // Process view
