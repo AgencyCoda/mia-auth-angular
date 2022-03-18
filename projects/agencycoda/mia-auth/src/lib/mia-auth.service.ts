@@ -16,6 +16,12 @@ export const MIA_AUTH_KEY_STORAGE_TOKEN = 'mia_auth.storage';
 })
 export class MiaAuthService extends MiaBaseHttpService {
 
+  /**
+   * V2:
+   * Solo se ejecuta cuando se loguea o determinamos que el usuario ya estaba con la sesion iniciada
+   */
+  public onLoggedIn = new Subject<boolean>();
+
   public currentUser = new BehaviorSubject<MiaToken>(new MiaToken());
   public isLoggedIn = new BehaviorSubject<boolean>(false);
   public isLoggedOut = new Subject();
@@ -46,6 +52,7 @@ export class MiaAuthService extends MiaBaseHttpService {
     return this.postOb<MiaToken>(this.config.baseUrl + 'mia-auth/login', { email: email, password: password })
     .pipe(map(result => {
       this.saveUser(result);
+      this.onLoggedIn.next(true);
       this.isLoggedIn.next(true);
       return result;
     }));
@@ -84,6 +91,7 @@ export class MiaAuthService extends MiaBaseHttpService {
     return this.postOb<MiaToken>(this.config.baseUrl + 'mia-auth/login-with-facebook', { token: token })
     .pipe(map(result => {
       this.saveUser(result);
+      this.onLoggedIn.next(true);
       this.isLoggedIn.next(true);
       return result;
     }));
@@ -167,6 +175,7 @@ export class MiaAuthService extends MiaBaseHttpService {
       }
 
       this.isLoggedIn.next(true);
+      this.onLoggedIn.next(true);
       this.currentUser.next(user);
     });
   }
