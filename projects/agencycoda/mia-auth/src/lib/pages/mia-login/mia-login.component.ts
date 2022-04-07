@@ -12,6 +12,13 @@ export class MiaLoginPageConfig {
   titlePage = '';
   logoImage = '';
   imageRight = '';
+  emailLabel = 'Email address';
+  emailPlaceholder = 'yourEmail@company.com';
+  passwordLabel = 'Password';
+  forgotPasswordLabel = 'Forgot password';
+  loginButtonLabel = 'LOG IN';
+  loginGoogleButtonLabel = 'LOG IN With Google';
+  signupLinkText = 'Don’t have an account? Sign Up';
   routeHome = '/';
   routeSuccess = '/';
   routeRegister = '/auth/register';
@@ -19,7 +26,7 @@ export class MiaLoginPageConfig {
   hasLoginWithGoogle = false;
   hasRegister = true;
   hasRecoveryPassword = true;
-  phrase? = '“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed enim”';
+  phrase?= '“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed enim”';
   roles = [];
 }
 @Component({
@@ -53,7 +60,7 @@ export class MiaLoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if(this.subscription != undefined){
+    if (this.subscription != undefined) {
       this.subscription.unsubscribe();
       this.subscription = undefined;
     }
@@ -74,7 +81,7 @@ export class MiaLoginComponent implements OnInit, OnDestroy {
 
     this.isLoading = true;
     let obs: Observable<MiaToken>;
-    if(this.config.roles.length == 0){
+    if (this.config.roles.length == 0) {
       obs = this.authService.signIn(this.formGroup.get('email')!.value, this.formGroup.get('password')!.value);
     } else {
       let user = new MiaUser();
@@ -82,14 +89,14 @@ export class MiaLoginComponent implements OnInit, OnDestroy {
       obs = this.authService.signInUserWithRole(user, this.formGroup.get('password')!.value, this.config.roles);
     }
     obs.subscribe(data => {
-       this.isLoading = false;
-      this.navigator.navigateByUrl(this.config.routeSuccess);
-     }, error => {
       this.isLoading = false;
-      if(error && error.message){
+      this.navigator.navigateByUrl(this.config.routeSuccess);
+    }, error => {
+      this.isLoading = false;
+      if (error && error.message) {
         this.messageError = error.message;
       }
-     });
+    });
   }
 
   loginWithGoogle() {
@@ -98,33 +105,33 @@ export class MiaLoginComponent implements OnInit, OnDestroy {
 
   loadConfig() {
     this.subscription = this.route.data
-    .pipe(switchMap(result => {
-      this.config = result as MiaLoginPageConfig;
-      return this.route.queryParams;
-    }))
-    .pipe(
-      switchMap((params) => {
-        const redirect = params.redirect;
-        if (
-          redirect !== '/login' &&
-          redirect !== '/' &&
-          redirect !== '' &&
-          redirect !== null &&
-          redirect !== undefined &&
-          redirect !== '%2F' &&
-          redirect !== '/login;redirect=%2F'
-        ) {
-          this.config.routeSuccess = redirect;
-        }
+      .pipe(switchMap(result => {
+        this.config = result as MiaLoginPageConfig;
+        return this.route.queryParams;
+      }))
+      .pipe(
+        switchMap((params) => {
+          const redirect = params.redirect;
+          if (
+            redirect !== '/login' &&
+            redirect !== '/' &&
+            redirect !== '' &&
+            redirect !== null &&
+            redirect !== undefined &&
+            redirect !== '%2F' &&
+            redirect !== '/login;redirect=%2F'
+          ) {
+            this.config.routeSuccess = redirect;
+          }
 
-        return this.authService.isLoggedIn;
-      })
-    )
-    .subscribe((isLogged) => {
-      if (isLogged) {
-        this.navigator.navigateByUrl(this.config.routeSuccess);
-      }
-      return this.authService.getUser();
-    });
+          return this.authService.isLoggedIn;
+        })
+      )
+      .subscribe((isLogged) => {
+        if (isLogged) {
+          this.navigator.navigateByUrl(this.config.routeSuccess);
+        }
+        return this.authService.getUser();
+      });
   }
 }
