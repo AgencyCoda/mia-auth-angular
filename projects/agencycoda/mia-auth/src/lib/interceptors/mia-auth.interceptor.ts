@@ -17,6 +17,10 @@ export class MiaAuthInterceptor implements HttpInterceptor {
   ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if(request.url.indexOf('maps.googleapis.com') >= 0){
+      return next.handle(request.clone());
+    }
+
     if(request.url.indexOf('storage.googleapis.com') >= 0){
       return next.handle(request.clone());
     }
