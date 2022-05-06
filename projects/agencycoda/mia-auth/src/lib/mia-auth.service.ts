@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { MiaAuthConfig, MIA_AUTH_PROVIDER } from './entities/mia-auth-config';
 import { MiaToken } from './entities/mia-token';
 import { MiaUser } from './entities/mia-user';
@@ -104,6 +104,15 @@ export class MiaAuthService extends MiaBaseHttpService {
     this.isLoggedIn.next(false);
     this.currentUser.next(new MiaToken());
     this.isLoggedOut.next();
+  }
+
+  logOut2(): Observable<any> {
+    return this.storage.delete(MIA_AUTH_KEY_STORAGE_TOKEN)
+    .pipe(switchMap(r => this.storage.delete(MIA_AUTH_KEY_STORAGE_ROLES)))
+    .pipe(switchMap(r => this.storage.delete(MIA_AUTH_KEY_STORAGE_PERMISSIONS_BY_USER)))
+    .pipe(tap(r => this.isLoggedIn.next(false)))
+    .pipe(tap(r => this.currentUser.next(new MiaToken())))
+    .pipe(tap(r => this.isLoggedOut.next()));
   }
 
   changePasswordInRecovery(token: string, email: string, password: string): Observable<MiaResponse<boolean>> {

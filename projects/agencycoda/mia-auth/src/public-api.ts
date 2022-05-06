@@ -8,6 +8,7 @@ export * from './lib/entities/mia-role';
 export * from './lib/entities/mia-auth-config';
 
 export * from './lib/interceptors/mia-auth.interceptor';
+export * from './lib/interceptors/mia-auth-with-verify.interceptor';
 
 export * from './lib/guards/mia-auth.guard';
 
