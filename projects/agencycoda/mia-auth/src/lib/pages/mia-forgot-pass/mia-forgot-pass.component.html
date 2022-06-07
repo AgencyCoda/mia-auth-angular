@@ -5,30 +5,32 @@
         </a>
 
         <div *ngIf="isLoading" class="content">
-            Loading...
+            {{ config.loadingText?config.loadingText:'Loading...' }}
             <!-- <app-loading-bound-circles></app-loading-bound-circles> -->
         </div>
 
         <!-- Step 1 -->
         <div *ngIf="!isLoading" class="content intro-component-animation">
-            <h1>Forgot password</h1>
-            <p *ngIf="!isSend">Enter your email to recover your forgot password</p>
+            <h1>{{ config.titlePage?config.titlePage:'Forgot password' }}</h1>
+            <p *ngIf="!isSend">{{ config.subtitle?config.subtitle:'Enter your email to recover your forgot password' }}</p>
             <br>
             <mat-form-field *ngIf="!isSend" appearance="outline">
-                <mat-label>Email address</mat-label>
+                <mat-label>{{ config.emailLabel?config.emailLabel:'Email address' }}</mat-label>
                 <input matInput type="email" name="email_recovery" [formControl]="inputEmail" placeholder="yourEmail@gmail.com" />
             </mat-form-field>
 
-            <div *ngIf="messageError != ''" class="alert alert-error">{{ messageError }}</div>
+            <div *ngIf="messageError != ''" class="alert alert-error">{{messageError}}</div>
     
-            <button *ngIf="!isSend" mat-raised-button color="primary" class="btn" (click)="onClickRecovery()">RECOVERY PASS</button>
+            <button *ngIf="!isSend" mat-raised-button color="primary" class="btn" (click)="onClickRecovery()">{{ config.buttonLabel?config.buttonLabel:'RECOVERY PASS' }}</button>
 
             <div *ngIf="isSend" class="alert alert-success intro-component-animation">
-                If you have an account, we’ll email you a reset link.
+                {{ config.successText?config.successText:'If you have an account, we will email you a reset link.' }}
             </div>
 
             <div style="text-align: center; margin-top: 3em;">
-                <a [routerLink]="config.routeLogin" class="link hover-linear body-2"> I remember my password, Login </a>
+                <a [routerLink]="config.routeLogin" class="link hover-linear body-2">
+                    {{ config.rememberText?config.rememberText:'I remember my password, Login ' }}
+                </a>
             </div>
         </div>
     </div>

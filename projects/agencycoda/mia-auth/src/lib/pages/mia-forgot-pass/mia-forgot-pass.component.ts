@@ -4,11 +4,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MiaAuthService } from '../../mia-auth.service';
 
 export class MiaForgoPassPageConfig {
-  titlePage = '';
-  logoImage = '';
+  titlePage = 'Forgot password';
+  subtitle? = 'Enter your email to recover your forgot password';
+  logoImage? = '';
   imageRight = '';
   routeHome = '/';
   routeLogin = '/auth/login';
+  emailLabel? = 'Email address';
+  buttonLabel? = 'RECOVERY PASS';
+  successText? = 'If you have an account, we will email you a reset link.';
+  rememberText? = 'I remember my password, Login ';
+  loadingText? = 'Loading...';
 }
 
 @Component({
