@@ -28,6 +28,9 @@ export class MiaLoginPageConfig {
   hasRecoveryPassword = true;
   phrase?= '“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed enim”';
   roles = [];
+  errorMessageEmail? = 'You must enter email address';
+  errorMessagePassword? = 'You must password';
+  textLoading? = 'Loading...';
 }
 @Component({
   selector: 'mia-login',
@@ -71,11 +74,11 @@ export class MiaLoginComponent implements OnInit, OnDestroy {
     this.messageError = '';
     // Verificar si ingreso el email
     if (this.formGroup.get('email')!.value == '') {
-      this.messageError = 'You must enter email address';
+      this.messageError = this.config.errorMessageEmail ?? 'You must enter email address';
       return;
     }
     if (this.formGroup.get('password')!.value == '') {
-      this.messageError = 'You must password';
+      this.messageError = this.config.errorMessagePassword ?? 'You must password';
       return;
     }
 

@@ -3,7 +3,7 @@
 
         <div *ngIf="isLoading" class="content">
             <!-- <app-loading-bound-circles></app-loading-bound-circles> -->
-            Loading...
+            {{config.textLoading??'Loading...'}}
         </div>
 
         <div *ngIf="!isLoading" class="content intro-component-animation" [formGroup]="formGroup">
