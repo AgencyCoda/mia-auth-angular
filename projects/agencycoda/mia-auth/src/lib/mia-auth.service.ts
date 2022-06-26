@@ -49,7 +49,7 @@ export class MiaAuthService extends MiaBaseHttpService {
 
   signIn(email: string, password: string): Observable<MiaToken> {
     //return this.http.post<MiaToken>(this.config.baseUrl + 'mia-auth/login', { email: email, password: password })
-    return this.postOb<MiaToken>(this.config.baseUrl + 'mia-auth/login', { email: email, password: password })
+    return this.postOb<MiaToken>(this.config.baseUrl + 'mia-auth/login', { email: email, password: password, lang: this.config.lang })
     .pipe(map(result => {
       this.saveUser(result);
       this.onLoggedIn.next(true);
@@ -71,7 +71,12 @@ export class MiaAuthService extends MiaBaseHttpService {
 
         if(!hasPermission){
           this.removeUser();
-          throw {code: -5, message: 'Your account has not permission'};
+          if(this.config.lang == 'es'){
+            throw {code: -5, message: 'Tu cuenta no posee permisos.'};
+          } else {
+            throw {code: -5, message: 'Your account has not permission'};
+          }
+          
         }
 
       return result;
@@ -116,7 +121,7 @@ export class MiaAuthService extends MiaBaseHttpService {
   }
 
   changePasswordInRecovery(token: string, email: string, password: string): Observable<MiaResponse<boolean>> {
-    return this.postOb(this.config.baseUrl + 'mia-auth/change-password-recovery', { email: email, token: token, password: password});
+    return this.postOb(this.config.baseUrl + 'mia-auth/change-password-recovery', { email: email, token: token, password: password, lang: this.config.lang});
   }
 
   recoveryPass(email: string, lang?: string): Observable<MiaResponse<boolean>> {
