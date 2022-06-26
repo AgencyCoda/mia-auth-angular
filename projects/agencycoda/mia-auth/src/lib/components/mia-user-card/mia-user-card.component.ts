@@ -18,6 +18,7 @@ export class MiaUserCardComponent implements OnInit {
     { title: 'Phone', key: 'phone' },
   ];
   @Input() fieldsExtra: Array<{ title: string, value: string }> = [];
+  @Input() lang: string = 'en';
 
   @Output() clickEdit = new EventEmitter();
   @Output() clickChangePassword = new EventEmitter();
