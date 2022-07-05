@@ -83,7 +83,7 @@ export class MiaAuthService extends MiaBaseHttpService {
     }));
   }
 
-  signInWithApple(token: string): Observable<MiaResponse<MiaToken>> {
+  signInWithApple(token: string): Observable<MiaToken> {
     return this.postOb<MiaToken>(this.config.baseUrl + 'mia-auth/login-with-apple', { token: token })
     .pipe(map(result => {
       this.saveUser(result);
@@ -93,7 +93,7 @@ export class MiaAuthService extends MiaBaseHttpService {
     }));
   }
 
-  signInWithGoogle(token: string): Observable<MiaResponse<MiaToken>> {
+  signInWithGoogle(token: string): Observable<MiaToken> {
     return this.postOb<MiaToken>(this.config.baseUrl + 'mia-auth/login-with-google', { token: token })
     .pipe(map(result => {
       this.saveUser(result);
@@ -103,7 +103,7 @@ export class MiaAuthService extends MiaBaseHttpService {
     }));
   }
 
-  signInWithFacebook(token: string): Observable<MiaResponse<MiaToken>> {
+  signInWithFacebook(token: string): Observable<MiaToken> {
     return this.postOb<MiaToken>(this.config.baseUrl + 'mia-auth/login-with-facebook', { token: token })
     .pipe(map(result => {
       this.saveUser(result);
