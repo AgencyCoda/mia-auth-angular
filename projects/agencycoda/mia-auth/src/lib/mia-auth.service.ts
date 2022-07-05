@@ -83,10 +83,21 @@ export class MiaAuthService extends MiaBaseHttpService {
     }));
   }
 
+  signInWithApple(token: string): Observable<MiaResponse<MiaToken>> {
+    return this.postOb<MiaToken>(this.config.baseUrl + 'mia-auth/login-with-apple', { token: token })
+    .pipe(map(result => {
+      this.saveUser(result);
+      this.onLoggedIn.next(true);
+      this.isLoggedIn.next(true);
+      return result;
+    }));
+  }
+
   signInWithGoogle(token: string): Observable<MiaResponse<MiaToken>> {
     return this.postOb<MiaToken>(this.config.baseUrl + 'mia-auth/login-with-google', { token: token })
     .pipe(map(result => {
       this.saveUser(result);
+      this.onLoggedIn.next(true);
       this.isLoggedIn.next(true);
       return result;
     }));
