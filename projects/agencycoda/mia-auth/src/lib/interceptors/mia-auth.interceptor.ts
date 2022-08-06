@@ -3,12 +3,14 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpContextToken
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MiaAuthService } from '../mia-auth.service';
 import { switchMap } from 'rxjs/operators';
 
+export const IS_PUBLIC_API = new HttpContextToken<boolean>(() => false);
 @Injectable()
 export class MiaAuthInterceptor implements HttpInterceptor {
 
@@ -23,6 +25,10 @@ export class MiaAuthInterceptor implements HttpInterceptor {
 
     if(request.url.indexOf('storage.googleapis.com') >= 0){
       return next.handle(request.clone());
+    }
+
+    if (request.context.get(IS_PUBLIC_API)) {
+      return next.handle(request);
     }
 
     return this.authService.getUser().pipe(switchMap(user => {
