@@ -148,6 +148,5 @@
     }},
   "cli": {
     "analytics": "3107ff08-c40f-4276-842c-2d3f4c2f5622"
-  },
-  "defaultProject": "@agencycoda/mia-auth"
+  }
 }
