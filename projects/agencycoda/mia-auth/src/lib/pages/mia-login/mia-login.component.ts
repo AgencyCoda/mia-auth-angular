@@ -1,6 +1,6 @@
 import { MiaResponse } from '@agencycoda/mia-core';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -41,9 +41,9 @@ export class MiaLoginComponent implements OnInit, OnDestroy {
 
   config!: MiaLoginPageConfig;
 
-  formGroup = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl('')
+  formGroup = new UntypedFormGroup({
+    email: new UntypedFormControl(''),
+    password: new UntypedFormControl('')
   });
 
   isLoading = false;

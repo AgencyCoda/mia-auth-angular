@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MiaAuthService } from '../../mia-auth.service';
 
@@ -29,7 +29,7 @@ export class MiaForgotPassComponent implements OnInit {
   isLoading = false;
   isSend = false;
 
-  inputEmail = new FormControl('');
+  inputEmail = new UntypedFormControl('');
 
   messageError = '';
 
