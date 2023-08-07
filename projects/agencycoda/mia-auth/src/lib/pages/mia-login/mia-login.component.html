@@ -38,7 +38,7 @@
             <button mat-raised-button color="primary" class="btn" (click)="onClickLogin()"> {{ config.loginButtonLabel?config.loginButtonLabel:'LOG IN' }} </button>
 
             <button *ngIf="config.hasLoginWithGoogle" mat-raised-button color="primary" class="btn"
-                (click)="loginWithGoogle()">  {{ config.loginGoogleButtonLabel?config.loginGoogleButtonLabel:'LOG IN With Google' } </button>
+                (click)="loginWithGoogle()">  {{ config.loginGoogleButtonLabel?config.loginGoogleButtonLabel:'LOG IN With Google' }} </button>
 
             <div *ngIf="config.hasRegister" style="text-align: center;">
                 <a [routerLink]="config.routeRegister" class="link hover-linear body-2"> {{ config.signupLinkText?config.signupLinkText:'Don’t have an account? Sign Up' }}
