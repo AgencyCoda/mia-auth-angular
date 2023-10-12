@@ -13,7 +13,7 @@ export class RoleTitlePipe implements PipeTransform {
   constructor(
     protected roleService: MiaRoleService
   ){
-    roleService.listRoles().then(result => this.roles = result);
+    roleService.listRoles().subscribe(result => this.roles = result);
   }
 
   transform(value: number): string {

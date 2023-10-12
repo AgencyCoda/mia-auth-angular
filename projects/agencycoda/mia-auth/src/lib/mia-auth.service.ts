@@ -40,7 +40,7 @@ export class MiaAuthService extends MiaBaseHttpService {
     params.password = password;
     params.platform = 2;
     params.lang = lang;
-    return this.postOb(this.config.baseUrl + 'mia-auth/register', params);
+    return this.post(this.config.baseUrl + 'mia-auth/register', params);
   }
 
   signInUser(user: MiaUser, password: string): Observable<MiaToken> {
@@ -49,7 +49,7 @@ export class MiaAuthService extends MiaBaseHttpService {
 
   signIn(email: string, password: string): Observable<MiaToken> {
     //return this.http.post<MiaToken>(this.config.baseUrl + 'mia-auth/login', { email: email, password: password })
-    return this.postOb<MiaToken>(this.config.baseUrl + 'mia-auth/login', { email: email, password: password, lang: this.config.lang })
+    return this.post<MiaToken>(this.config.baseUrl + 'mia-auth/login', { email: email, password: password, lang: this.config.lang })
     .pipe(map(result => {
       this.saveUser(result);
       this.onLoggedIn.next(true);
@@ -76,7 +76,7 @@ export class MiaAuthService extends MiaBaseHttpService {
           } else {
             throw {code: -5, message: 'Your account has not permission'};
           }
-          
+
         }
 
       return result;
@@ -84,7 +84,7 @@ export class MiaAuthService extends MiaBaseHttpService {
   }
 
   signInWithApple(token: string): Observable<MiaToken> {
-    return this.postOb<MiaToken>(this.config.baseUrl + 'mia-auth/login-with-apple', { token: token })
+    return this.post<MiaToken>(this.config.baseUrl + 'mia-auth/login-with-apple', { token: token })
     .pipe(map(result => {
       this.saveUser(result);
       this.onLoggedIn.next(true);
@@ -94,7 +94,7 @@ export class MiaAuthService extends MiaBaseHttpService {
   }
 
   signInWithGoogle(token: string): Observable<MiaToken> {
-    return this.postOb<MiaToken>(this.config.baseUrl + 'mia-auth/login-with-google', { token: token })
+    return this.post<MiaToken>(this.config.baseUrl + 'mia-auth/login-with-google', { token: token })
     .pipe(map(result => {
       this.saveUser(result);
       this.onLoggedIn.next(true);
@@ -104,7 +104,7 @@ export class MiaAuthService extends MiaBaseHttpService {
   }
 
   signInWithFacebook(token: string): Observable<MiaToken> {
-    return this.postOb<MiaToken>(this.config.baseUrl + 'mia-auth/login-with-facebook', { token: token })
+    return this.post<MiaToken>(this.config.baseUrl + 'mia-auth/login-with-facebook', { token: token })
     .pipe(map(result => {
       this.saveUser(result);
       this.onLoggedIn.next(true);
@@ -119,7 +119,7 @@ export class MiaAuthService extends MiaBaseHttpService {
     this.storage.delete(MIA_AUTH_KEY_STORAGE_PERMISSIONS_BY_USER).subscribe();
     this.isLoggedIn.next(false);
     this.currentUser.next(new MiaToken());
-    this.isLoggedOut.next();
+    this.isLoggedOut.next(true);
   }
 
   logOut2(): Observable<any> {
@@ -128,27 +128,27 @@ export class MiaAuthService extends MiaBaseHttpService {
     .pipe(switchMap(r => this.storage.delete(MIA_AUTH_KEY_STORAGE_PERMISSIONS_BY_USER)))
     .pipe(tap(r => this.isLoggedIn.next(false)))
     .pipe(tap(r => this.currentUser.next(new MiaToken())))
-    .pipe(tap(r => this.isLoggedOut.next()));
+    .pipe(tap(r => this.isLoggedOut.next(true)));
   }
 
   changePasswordInRecovery(token: string, email: string, password: string): Observable<MiaResponse<boolean>> {
-    return this.postOb(this.config.baseUrl + 'mia-auth/change-password-recovery', { email: email, token: token, password: password, lang: this.config.lang});
+    return this.post(this.config.baseUrl + 'mia-auth/change-password-recovery', { email: email, token: token, password: password, lang: this.config.lang});
   }
 
   recoveryPass(email: string, lang?: string): Observable<MiaResponse<boolean>> {
-    return this.postOb(this.config.baseUrl + 'mia-auth/recovery', { email: email, lang: lang });
+    return this.post(this.config.baseUrl + 'mia-auth/recovery', { email: email, lang: lang });
   }
 
   updateUser(user: any): Observable<MiaUser> {
-    return this.postOb(this.config.baseUrl + 'mia-auth/update-profile', user);
+    return this.post(this.config.baseUrl + 'mia-auth/update-profile', user);
   }
 
   verifiedEmail(email: string, token: string, lang?: string): Observable<MiaResponse<boolean>> {
-    return this.postOb(this.config.baseUrl + 'mia-auth/verified-email', { email: email, token: token, lang: lang });
+    return this.post(this.config.baseUrl + 'mia-auth/verified-email', { email: email, token: token, lang: lang });
   }
 
   me(): Observable<MiaResponse<MiaUser>> {
-    return this.getOb(this.config.baseUrl + 'mia-auth/me')
+    return this.get(this.config.baseUrl + 'mia-auth/me')
     .pipe(map(result => {
       this.saveMeWithToken(result);
       //} else if (result.error && result.error!.code == -2) {

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { MiaAuthConfig, MIA_AUTH_PROVIDER } from '../entities/mia-auth-config';
 import { MiaUser } from '../entities/mia-user';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +18,11 @@ export class MiaUserService extends MiaBaseCrudHttpService<MiaUser> {
     this.basePathUrl = config.baseUrl + 'user';
   }
 
-  block(userId: number): Promise<boolean> {
+  block(userId: number): Observable<boolean> {
       return this.post(this.basePathUrl + '/block', { id: userId, block: 1 });
   }
-  
-  unblock(userId: number): Promise<boolean> {
-      return this.post(this.basePathUrl + '/block', { id: userId, block: 0 }); 
+
+  unblock(userId: number): Observable<boolean> {
+      return this.post(this.basePathUrl + '/block', { id: userId, block: 0 });
     }
 }

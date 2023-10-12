@@ -2,7 +2,7 @@ import { MiaBaseCrudHttpService, MiaBaseHttpService, MiaCoreConfig, MiaPaginatio
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { StorageMap } from '@ngx-pwa/local-storage';
-import { Observable, of } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { MiaPermission, MiaRole } from '../entities/mia-role';
 
@@ -21,19 +21,20 @@ export class MiaRoleService extends MiaBaseCrudHttpService<MiaRole> {
   ) {
     super(config, http);
     this.basePathUrl = config.baseUrl + 'mia-auth/role';
-    
+
   }
 
-  list(query: MiaQuery): Promise<MiaPagination<MiaRole>> {
-    return new Promise<any>((resolve, reject) => {
-
-      this.listOb(query).subscribe(result => {
-        resolve(result);
-      }, error => {
-        reject(error);
-      });
-
-    });
+  list(query: MiaQuery): Observable<MiaPagination<MiaRole>> {
+    return from(new Promise<MiaPagination<MiaRole>>((resolve, reject) => {
+      this.listOb(query).subscribe(
+        result => {
+          resolve(result);
+        },
+        error => {
+          reject(error);
+        }
+      );
+    }));
   }
 
   listOb(query: MiaQuery): Observable<MiaPagination<MiaRole>> {
@@ -41,7 +42,7 @@ export class MiaRoleService extends MiaBaseCrudHttpService<MiaRole> {
     return this.storage.get<string>(MIA_AUTH_KEY_STORAGE_ROLES, { type: 'string' })
     .pipe(switchMap(data => {
       if(data == undefined || data == ''){
-        return super.listOb(query).pipe(map(result => {
+        return super.list(query).pipe(map(result => {
 
           this.storage.set(MIA_AUTH_KEY_STORAGE_ROLES, JSON.stringify(result)).subscribe();
 
@@ -55,11 +56,11 @@ export class MiaRoleService extends MiaBaseCrudHttpService<MiaRole> {
   }
 
   allPermissionByUser(): Observable<Array<MiaPermission>> {
-    
+
     return this.storage.get<string>(MIA_AUTH_KEY_STORAGE_PERMISSIONS_BY_USER, { type: 'string' })
     .pipe(switchMap(data => {
       if(data == undefined || data == ''){
-        return this.getOb(this.config.baseUrl + 'mia-auth/role/access').pipe(map(result => {
+        return this.get(this.config.baseUrl + 'mia-auth/role/access').pipe(map(result => {
 
           this.storage.set(MIA_AUTH_KEY_STORAGE_PERMISSIONS_BY_USER, JSON.stringify(result)).subscribe();
 
@@ -71,7 +72,7 @@ export class MiaRoleService extends MiaBaseCrudHttpService<MiaRole> {
     }));
   }
 
-  listRoles(): Promise<Array<MiaRole>> {
+  listRoles(): Observable<Array<MiaRole>> {
     return this.get(this.config.baseUrl + 'mia-auth/role/all');
   }
 }
