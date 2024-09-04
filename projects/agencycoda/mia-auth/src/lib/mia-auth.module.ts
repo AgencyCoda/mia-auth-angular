@@ -12,10 +12,10 @@ import { RoleIdPipe } from './pipes/role-id.pipe';
 import { MiaAuthConfig, MiaPermissionConfig, MIA_AUTH_PROVIDER, MIA_PERMISSION_PROVIDER } from './entities/mia-auth-config';
 
 /** Angular Material */
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
+import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
+import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
 import { MatDividerModule } from '@angular/material/divider';
 
 
