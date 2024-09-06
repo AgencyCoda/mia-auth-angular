@@ -15,6 +15,9 @@
     "importHelpers": true,
     "target": "es2020",
     "module": "es2020",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
     "lib": [
       "es2018",
       "dom"
@@ -23,9 +26,17 @@
       "@agencycoda/mia-auth": [
         "dist/agencycoda/mia-auth/agencycoda-mia-auth",
         "dist/agencycoda/mia-auth"
+      ],
+      "@angular/*": ["node_modules/@angular/*"],
+      "rxjs": [
+        "node_modules/rxjs"
+      ],
+      "rxjs/*": [
+        "node_modules/rxjs/*"
       ]
     }
   },
+  "exclude": ["node_modules"],
   "angularCompilerOptions": {
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,

@@ -12,7 +12,7 @@
   },
   "private": true,
   "dependencies": {
-    "@agencycoda/mia-core": "^14.0.0",
+    "@agencycoda/mia-core": "^16.0.0",
     "@angular/animations": "^16.2.12",
     "@angular/cdk": "^16.2.14",
     "@angular/common": "^16.2.12",
