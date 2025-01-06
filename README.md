@@ -17,6 +17,12 @@ This project provides a GitHub Action that automatically deploys a package to np
    git push origin v18.0.0
    ```
 
+   Get list of tags
+
+   ```bash
+   git tag --sort=v:refname
+   ```
+
 2. **Workflow Configuration**: The action is configured in the `.github/workflows/deploy.yml` file. This file defines the workflow that runs on tag creation.
 
 3. **Version Replacement**: The action will automatically replace the version in `package.json` with the tag version.
