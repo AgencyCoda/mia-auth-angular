@@ -1,4 +1,4 @@
-import { MiaBaseCrudHttpService, MiaBaseHttpService, MiaPagination, MiaQuery, MiaResponse } from '@agencycoda/mia-core';
+import { MiaBaseCrudHttpService, MiaBaseHttpService, MiaPagination, MiaQuery, MiaResponse } from '@agencycoda/mia-core-jv';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { StorageMap } from '@ngx-pwa/local-storage';

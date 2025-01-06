@@ -1,4 +1,4 @@
-import { MiaResponse } from '@agencycoda/mia-core';
+import { MiaResponse } from '@agencycoda/mia-core-jv';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { StorageMap } from '@ngx-pwa/local-storage';

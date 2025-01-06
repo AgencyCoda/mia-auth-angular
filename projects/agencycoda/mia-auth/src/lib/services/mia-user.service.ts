@@ -1,4 +1,4 @@
-import { MiaBaseCrudHttpService } from '@agencycoda/mia-core';
+import { MiaBaseCrudHttpService } from '@agencycoda/mia-core-jv';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { MiaAuthConfig, MIA_AUTH_PROVIDER } from '../entities/mia-auth-config';

@@ -1,4 +1,4 @@
-import { MiaResponse } from '@agencycoda/mia-core';
+import { MiaResponse } from '@agencycoda/mia-core-jv';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';

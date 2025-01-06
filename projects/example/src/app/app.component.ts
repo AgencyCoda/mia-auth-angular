@@ -1,5 +1,5 @@
 import { MiaUser } from '@agencycoda/mia-auth';
-import { MiaQuery } from '@agencycoda/mia-core';
+import { MiaQuery } from '@agencycoda/mia-core-jv';
 import { Component, OnInit } from '@angular/core';
 import { MiaRoleService } from 'projects/agencycoda/mia-auth/src/public-api';
 

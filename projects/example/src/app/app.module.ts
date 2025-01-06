@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MiaAuthModule } from 'projects/agencycoda/mia-auth/src/lib/mia-auth.module';
 import { MIA_AUTH_PROVIDER } from '@agencycoda/mia-auth';
-import { MiaCoreModule } from '@agencycoda/mia-core';
+import { MiaCoreModule } from '@agencycoda/mia-core-jv';
 
 @NgModule({
   declarations: [
