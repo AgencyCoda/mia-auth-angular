@@ -115,7 +115,7 @@ export class MiaAuthService {
     this.storage.delete(MIA_AUTH_KEY_STORAGE_PERMISSIONS_BY_USER).subscribe();
     this.isLoggedIn.next(false);
     this.currentUser.next(new MiaToken());
-    this.isLoggedOut.next();
+    this.isLoggedOut.next(true);
   }
 
   changePasswordInRecovery(token: string, email: string, password: string): Observable<MiaResponse<boolean>> {
